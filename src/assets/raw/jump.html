@@ -1,0 +1,47 @@
+
+    <!doctype html>
+    <html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>jump</title>
+    </head>
+
+    <body id="body">
+    </body>
+    <script>
+        var _url = location.href;
+    // var _origin = location.origin+"?";
+    var _query = '';
+    if (_url.indexOf('?') > -1) {
+        _query = _url.split("?")[1];
+    };
+
+    if (_query) {
+        _query = decodeURIComponent(decodeURIComponent(_query));
+        _query = _query.split('||||')[0].substring(2);
+        if (typeof _query == 'string') {
+            _query = '(' + JSON.parse(JSON.stringify(_query)) + ')';
+        }
+        const _aa = eval(_query);
+        if (typeof _aa.p2 == 'object') {
+            _aa.p2 = JSON.stringify(_aa.p2);
+        }
+        if (window.widgetmanager) {
+            window.widgetmanager.launchApp(_aa.p1, _aa.p2, _aa.p3, true);
+        }
+        if (window.widget && window.widget.exit) {
+            window.widget.exit();
+        } else {
+            window.close();
+        }
+    } else {
+        if (window.widget && window.widget.exit) {
+            window.widget.exit();
+        } else {
+            window.close();
+        }
+    }
+    </script>
+
+    </html>
